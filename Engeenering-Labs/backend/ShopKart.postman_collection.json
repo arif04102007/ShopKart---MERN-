@@ -1,0 +1,204 @@
+{
+  "info": {
+    "name": "ShopKart API",
+    "description": "Create products across many categories and verify them. Auth is cookie-based, so run 'Login' first — Postman stores the httpOnly token cookie and reuses it for the product routes.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8000" },
+    { "key": "email", "value": "you@example.com" },
+    { "key": "password", "value": "yourpassword" }
+  ],
+  "item": [
+    {
+      "name": "0. Register (only if you have no account)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"fullName\": \"Test User\",\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\",\n  \"phone\": \"9876543210\"\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": { "raw": "{{baseUrl}}/customers/register", "host": ["{{baseUrl}}"], "path": ["customers", "register"] }
+      }
+    },
+    {
+      "name": "1. Login  (RUN THIS FIRST)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Login succeeded', function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": { "raw": "{{baseUrl}}/customers/login", "host": ["{{baseUrl}}"], "path": ["customers", "login"] }
+      }
+    },
+    {
+      "name": "2. List all products",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": { "raw": "{{baseUrl}}/products", "host": ["{{baseUrl}}"], "path": ["products"] }
+      }
+    },
+    {
+      "name": "3. List categories",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": { "raw": "{{baseUrl}}/products/categories", "host": ["{{baseUrl}}"], "path": ["products", "categories"] }
+      }
+    },
+    {
+      "name": "Create Products (10 products, 10 categories)",
+      "item": [
+        {
+          "name": "Electronics — Bluetooth Earbuds Pro",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Bluetooth Earbuds Pro\",\n  \"description\": \"True wireless earbuds with active noise cancellation, a 28-hour charging case and IPX5 sweat resistance.\",\n  \"price\": 1999,\n  \"category\": \"Electronics\",\n  \"image\": \"https://picsum.photos/seed/shopkart-earbuds/800/800?grayscale\",\n  \"stock\": 30\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": { "raw": "{{baseUrl}}/products", "host": ["{{baseUrl}}"], "path": ["products"] }
+          }
+        },
+        {
+          "name": "Fashion — Slim Fit Denim Jeans",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Slim Fit Denim Jeans\",\n  \"description\": \"Stretch denim jeans with a tapered leg, five-pocket styling and a mid-rise waist.\",\n  \"price\": 1799,\n  \"category\": \"Fashion\",\n  \"image\": \"https://picsum.photos/seed/shopkart-jeans/800/800?grayscale\",\n  \"stock\": 25\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": { "raw": "{{baseUrl}}/products", "host": ["{{baseUrl}}"], "path": ["products"] }
+          }
+        },
+        {
+          "name": "Books — The Design of Everyday Things",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"The Design of Everyday Things\",\n  \"description\": \"A classic on human-centred design and why some products delight while others frustrate.\",\n  \"price\": 799,\n  \"category\": \"Books\",\n  \"image\": \"https://picsum.photos/seed/shopkart-doe/800/800?grayscale\",\n  \"stock\": 20\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": { "raw": "{{baseUrl}}/products", "host": ["{{baseUrl}}"], "path": ["products"] }
+          }
+        },
+        {
+          "name": "Home — Cast Iron Skillet",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Cast Iron Skillet\",\n  \"description\": \"Pre-seasoned 10-inch cast iron skillet that moves from hob to oven and holds heat beautifully.\",\n  \"price\": 1599,\n  \"category\": \"Home\",\n  \"image\": \"https://picsum.photos/seed/shopkart-skillet/800/800?grayscale\",\n  \"stock\": 18\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": { "raw": "{{baseUrl}}/products", "host": ["{{baseUrl}}"], "path": ["products"] }
+          }
+        },
+        {
+          "name": "Sports — Gym Duffel Bag",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Gym Duffel Bag\",\n  \"description\": \"40L duffel with a ventilated shoe compartment, a wet pocket and a padded shoulder strap.\",\n  \"price\": 1299,\n  \"category\": \"Sports\",\n  \"image\": \"https://picsum.photos/seed/shopkart-duffel/800/800?grayscale\",\n  \"stock\": 35\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": { "raw": "{{baseUrl}}/products", "host": ["{{baseUrl}}"], "path": ["products"] }
+          }
+        },
+        {
+          "name": "Beauty — Moisturising Body Lotion",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Moisturising Body Lotion\",\n  \"description\": \"Fast-absorbing lotion with shea butter and glycerin for 24-hour hydration. Fragrance-free.\",\n  \"price\": 449,\n  \"category\": \"Beauty\",\n  \"image\": \"https://picsum.photos/seed/shopkart-lotion/800/800?grayscale\",\n  \"stock\": 60\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": { "raw": "{{baseUrl}}/products", "host": ["{{baseUrl}}"], "path": ["products"] }
+          }
+        },
+        {
+          "name": "Toys — Kids Puzzle Cube",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Kids Puzzle Cube\",\n  \"description\": \"Colourful 3x3 twist puzzle with smooth, adjustable tension and a sturdy plastic core.\",\n  \"price\": 399,\n  \"category\": \"Toys\",\n  \"image\": \"https://picsum.photos/seed/shopkart-cube/800/800?grayscale\",\n  \"stock\": 45\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": { "raw": "{{baseUrl}}/products", "host": ["{{baseUrl}}"], "path": ["products"] }
+          }
+        },
+        {
+          "name": "Grocery — Basmati Rice 5kg",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Basmati Rice 5kg\",\n  \"description\": \"Aged long-grain basmati rice with a delicate aroma and separate, fluffy grains when cooked.\",\n  \"price\": 899,\n  \"category\": \"Grocery\",\n  \"image\": \"https://picsum.photos/seed/shopkart-rice/800/800?grayscale\",\n  \"stock\": 50\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": { "raw": "{{baseUrl}}/products", "host": ["{{baseUrl}}"], "path": ["products"] }
+          }
+        },
+        {
+          "name": "Musical Instruments — Acoustic Guitar",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Acoustic Guitar\",\n  \"description\": \"Full-size dreadnought acoustic guitar with a spruce top, rosewood fingerboard and a padded gig bag.\",\n  \"price\": 5999,\n  \"category\": \"Musical Instruments\",\n  \"image\": \"https://picsum.photos/seed/shopkart-guitar/800/800?grayscale\",\n  \"stock\": 8\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": { "raw": "{{baseUrl}}/products", "host": ["{{baseUrl}}"], "path": ["products"] }
+          }
+        },
+        {
+          "name": "Pet Supplies — Dog Chew Toy",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Dog Chew Toy\",\n  \"description\": \"Durable natural rubber chew toy that helps clean teeth. Suitable for medium and large breeds.\",\n  \"price\": 349,\n  \"category\": \"Pet Supplies\",\n  \"image\": \"https://picsum.photos/seed/shopkart-dogtoy/800/800?grayscale\",\n  \"stock\": 40\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": { "raw": "{{baseUrl}}/products", "host": ["{{baseUrl}}"], "path": ["products"] }
+          }
+        }
+      ]
+    }
+  ]
+}

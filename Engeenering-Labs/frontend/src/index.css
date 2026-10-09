@@ -1,0 +1,225 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap");
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+   Retro monochrome theme
+   Tailwind generates its utilities inside @layer utilities, so these
+   unlayered rules always win over them. That lets us remap the whole
+   palette to black & white without editing every component.
+   ------------------------------------------------------------------ */
+
+@theme {
+  --font-sans: "Space Mono", ui-monospace, SFMono-Regular, Menlo, Consolas,
+    monospace;
+  --font-mono: "Space Mono", ui-monospace, SFMono-Regular, Menlo, Consolas,
+    monospace;
+}
+
+body {
+  font-family: var(--font-mono);
+  background-color: #fff;
+  color: #000;
+}
+
+::selection {
+  background: #000;
+  color: #fff;
+}
+
+/* Sharp corners — no rounded shapes in a retro terminal look */
+[class~="rounded"],
+[class~="rounded-md"],
+[class~="rounded-lg"],
+[class~="rounded-xl"],
+[class~="rounded-2xl"],
+[class~="rounded-full"] {
+  border-radius: 0;
+}
+
+/* Surfaces become framed panels with a hard offset shadow */
+[class~="shadow"],
+[class~="shadow-sm"],
+[class~="shadow-md"],
+[class~="shadow-lg"] {
+  border: 2px solid #000;
+  box-shadow: 4px 4px 0 0 #000;
+}
+
+/* --- Backgrounds -------------------------------------------------- */
+[class~="bg-white"] {
+  background-color: #fff;
+}
+
+[class~="bg-gray-50"],
+[class~="bg-gray-50/50"],
+[class~="bg-gray-100"] {
+  background-color: #f4f4f4;
+}
+
+[class~="bg-gray-400"] {
+  background-color: #cfcfcf;
+}
+
+[class~="bg-gray-800"],
+[class~="bg-gray-900"],
+[class~="bg-black"],
+[class~="bg-green-600"],
+[class~="bg-green-700"],
+[class~="bg-blue-600"],
+[class~="bg-blue-700"],
+[class~="bg-pink-500"],
+[class~="bg-pink-600"],
+[class~="bg-red-500"],
+[class~="bg-red-600"] {
+  background-color: #000;
+}
+
+[class~="bg-green-50"],
+[class~="bg-green-100"],
+[class~="bg-blue-100"],
+[class~="bg-pink-50"],
+[class~="bg-pink-100"],
+[class~="bg-red-50"],
+[class~="bg-red-100"],
+[class~="bg-amber-50"],
+[class~="bg-amber-100"],
+[class~="bg-emerald-50/50"] {
+  background-color: #fff;
+}
+
+/* --- Text --------------------------------------------------------- */
+[class~="text-black"],
+[class~="text-gray-900"],
+[class~="text-gray-800"],
+[class~="text-gray-700"],
+[class~="text-green-600"],
+[class~="text-green-700"],
+[class~="text-green-800"],
+[class~="text-green-900"],
+[class~="text-blue-600"],
+[class~="text-blue-700"],
+[class~="text-blue-800"],
+[class~="text-pink-600"],
+[class~="text-pink-700"],
+[class~="text-red-500"],
+[class~="text-red-600"],
+[class~="text-red-700"],
+[class~="text-red-800"],
+[class~="text-amber-800"] {
+  color: #000;
+}
+
+[class~="text-gray-500"],
+[class~="text-gray-600"] {
+  color: #444;
+}
+
+[class~="text-white"] {
+  color: #fff;
+}
+
+/* --- Borders ------------------------------------------------------ */
+[class~="border-gray-100"],
+[class~="border-gray-200"],
+[class~="border-gray-300"],
+[class~="border-gray-800"],
+[class~="border-red-200"],
+[class~="border-pink-200"],
+[class~="border-pink-500"],
+[class~="border-amber-200"],
+[class~="border-green-200"] {
+  border-color: #000;
+}
+
+[class~="border-white"] {
+  border-color: #fff;
+}
+
+/* Invalid form fields get a dashed outline */
+[class~="border-red-500"] {
+  border-color: #000;
+  border-width: 2px;
+  border-style: dashed;
+}
+
+/* --- Alerts: inverted black panels -------------------------------- */
+[class~="bg-red-50"][class~="text-red-700"],
+[class~="bg-red-100"][class~="text-red-700"],
+[class~="bg-amber-50"][class~="text-amber-800"] {
+  background-color: #000;
+  border-color: #000;
+  color: #fff;
+}
+
+[class~="bg-green-50"][class~="text-green-800"],
+[class~="bg-pink-50"][class~="text-pink-700"] {
+  background-color: #fff;
+  border-color: #000;
+  color: #000;
+}
+
+/* --- Status badges ------------------------------------------------- */
+[class~="bg-green-100"][class~="text-green-800"],
+[class~="bg-blue-100"][class~="text-blue-800"],
+[class~="bg-amber-100"][class~="text-amber-800"] {
+  background-color: #fff;
+  border: 2px solid #000;
+  color: #000;
+}
+
+/* --- Hover states -------------------------------------------------- */
+[class~="hover:bg-green-700"]:hover,
+[class~="hover:bg-blue-700"]:hover,
+[class~="hover:bg-pink-600"]:hover,
+[class~="hover:bg-red-600"]:hover,
+[class~="hover:bg-gray-800"]:hover,
+[class~="hover:bg-gray-900"]:hover,
+[class~="hover:bg-black"]:hover {
+  background-color: #333;
+}
+
+[class~="hover:bg-gray-50"]:hover,
+[class~="hover:bg-gray-100"]:hover,
+[class~="hover:bg-white"]:hover,
+[class~="hover:bg-pink-50"]:hover,
+[class~="hover:bg-pink-100"]:hover {
+  background-color: #e6e6e6;
+}
+
+[class~="hover:text-gray-300"]:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+[class~="hover:text-gray-600"]:hover,
+[class~="hover:text-gray-900"]:hover,
+[class~="hover:text-blue-600"]:hover,
+[class~="hover:text-blue-800"]:hover,
+[class~="hover:text-pink-600"]:hover,
+[class~="hover:text-red-800"]:hover,
+[class~="hover:text-green-900"]:hover {
+  color: #000;
+  text-decoration: underline;
+}
+
+/* --- Focus rings --------------------------------------------------- */
+[class~="focus:border-blue-500"]:focus {
+  border-color: #000;
+}
+
+[class~="focus:ring-blue-200"]:focus,
+[class~="focus:ring-gray-800"]:focus {
+  --tw-ring-color: #000;
+}
+
+/* --- List dividers ------------------------------------------------- */
+[class~="divide-y"] > :not([hidden]) ~ :not([hidden]) {
+  border-color: #000;
+}
+
+/* --- Imagery ------------------------------------------------------- */
+/* Desaturated so colour product photos stay on-theme. Remove this rule
+   if you want product images rendered in colour. */
+img {
+  filter: grayscale(1);
+}
