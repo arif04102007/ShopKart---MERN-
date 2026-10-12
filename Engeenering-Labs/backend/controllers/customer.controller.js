@@ -4,6 +4,12 @@ import generateToken from "../utils/generateToken.js";
 
 const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
+const cookieOptions = {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'none'
+};
+
 const registerCustomer = async (req,res) =>{
     //console.log("req recieved");
     const { fullName, email, password, phone } = req.body;
@@ -69,16 +75,14 @@ const loginCustomer = async(req,res)=>{
 
         const token = generateToken(user._id);
 
-        res.cookie('token',token,{
-            httpOnly:true
-        })
+        res.cookie('token', token, cookieOptions);
 
         return res.status(200).json({
             success: true,
             message: "Login successful",
             customer: {
                 _id: user._id,
-                fullName: user.fullName,
+                fullName: user.name,
                 email: user.email,
                 phone: user.phone
             }
@@ -102,7 +106,7 @@ const showCustomer = (req,res)=>{
 
 
 const logoutCustomer = (req,res)=>{
-    res.clearCookie('token')
+    res.clearCookie('token', cookieOptions)
     return res.status(200).json({
         success:true,
         message:'Logout Successfull'
